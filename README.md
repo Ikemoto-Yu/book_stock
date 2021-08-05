@@ -19,6 +19,7 @@
 
 |   Column           |    Type    |    Option      |
 |--------------------|------------|----------------|
+| name               | string     | null: false    |
 | info               | text       | null: false    |
 | price              | integer    | null: false    |
 | published_on       | string     | null: false    |
