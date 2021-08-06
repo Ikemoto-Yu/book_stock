@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
 
   def index
-    #@books = Book.all
+    @books = Book.all
   end
 
   def new
@@ -9,12 +9,20 @@ class BooksController < ApplicationController
   end
 
   def create
-    Book.create(book_params)
+    @book = Book.new(book_params)
+    if @book.valid?
+      @book.save
+      redirect_to root_path 
+    else
+      binding.pry
+      render :new
+    end
   end
 
   private
 
   def book_params
-    params.require(:book).permit(:name, :image, :info, :price, :published_on, :author_name, :category, :appearance)
+    params.require(:book).permit(:name, :info, :price, :published_on, :author_name, :category, :appearance)
   end
+
 end

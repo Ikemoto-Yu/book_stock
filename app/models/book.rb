@@ -1,8 +1,8 @@
 class Book < ApplicationRecord
-  with_options :presence true do
+  with_options presence: true do
     validates :info
     validates :name
-    validates :price
+    validates :price ,  inclusion: { in: 0..9_999_999 }, format: { with: /\A[0-9]+\z/ }
     validates :published_on
     validates :author_name
     validates :category
