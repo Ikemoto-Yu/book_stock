@@ -6,6 +6,7 @@
         <%= render 'shared/errors' , model: form.object %>
       <%= form.text_field :name, placeholder: "タイトル" %>
       <%= form.text_area :info, placeholder: "info", rows: "10" %>
+      <%= form.file_field :image %>
       <%= form.text_field :price, placeholder: "希望小売価格" %>
       <div class='input-birth-wrap'>
       <%= raw sprintf(
