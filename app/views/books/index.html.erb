@@ -1,6 +1,24 @@
 <h1>トップページ</h1>
+
 <%= form_with(url: '#' , local: true, method: :get, class: "search-form") do |form| %>
   <% form.text_field :keyword, placeholder: "投稿を検索する", class: "search-input" %>
   <% form.submit "検索" , class: "search-btn" %>
 <% end %>
 
+<% unless @books.empty? %>
+<% @books.each do |book| %>
+
+  <li class="list">
+    <% link_to  '#' %>
+    <div class="book-contents-image">
+      <%= image_tag book.image, class: "item-image" %>
+    </div>
+  </li>
+
+<% end %>
+
+<% else %>
+
+<h1>本を投稿しよう</h1>
+
+<% end %>
