@@ -1,0 +1,23 @@
+<div class="item-img-content">
+  <%= image_tag @book.image , class:"book-box-img" %>
+</div>
+<div class="item-book-contents">
+  <span class="item-book-price">
+    <%= @book.price %>¥
+  </span>
+  <span class="item-book-category">
+    <%= @book.category %>
+  </span>
+  <span class="item-book-author_name">
+    <%= @book.author_name %>
+  </span>
+  <span class="item-book-published_on">
+    <%= @book.published_on %>
+  </span>
+  <span class="item-book-appearance">
+    <%= @book.appearance %>
+  </span>
+</div>
+<div class="item-book-info">
+  <%= @book.info %>
+</div>
