@@ -7,8 +7,9 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.integer :price , null: false
       t.date :published_on , null: false
       t.string :author_name , null: false
-      t.string :category , null: false
-      t.integer :appearance , null: false
+      t.integer :category_id , null: false
+      t.integer :appearance_id , null: false
+      t.references :user , null: false , foreign_key: true
       t.timestamps
     end
   end

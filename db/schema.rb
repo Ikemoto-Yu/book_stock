@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_06_072602) do
+ActiveRecord::Schema.define(version: 2021_08_07_065453) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -34,15 +34,17 @@ ActiveRecord::Schema.define(version: 2021_08_06_072602) do
   end
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name", limit: 255, null: false
+    t.string "name", null: false
     t.text "info", null: false
     t.integer "price", null: false
     t.date "published_on", null: false
-    t.string "author_name", limit: 255, null: false
-    t.string "category", limit: 255, null: false
-    t.integer "appearance", null: false
+    t.string "author_name", null: false
+    t.integer "category_id", null: false
+    t.integer "appearance_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_books_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -61,4 +63,5 @@ ActiveRecord::Schema.define(version: 2021_08_06_072602) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "books", "users"
 end

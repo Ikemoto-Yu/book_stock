@@ -6,7 +6,7 @@
     <%= @book.price %>¥
   </span>
   <span class="item-book-category">
-    <%= @book.category %>
+    <%= @book.category.name %>
   </span>
   <span class="item-book-author_name">
     <%= @book.author_name %>
@@ -15,7 +15,7 @@
     <%= @book.published_on %>
   </span>
   <span class="item-book-appearance">
-    <%= @book.appearance %>
+    <%= @book.appearance.name %>
   </span>
 </div>
 <div class="item-book-info">
