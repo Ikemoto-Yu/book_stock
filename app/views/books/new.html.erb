@@ -4,6 +4,7 @@
 
     <%= form_with model: @book, url: books_path , local: true do |form| %>
         <%= render 'shared/errors' , model: form.object %>
+      <div class="book-contents-box">
       <%= form.text_field :name, placeholder: "タイトル" %>
       <%= form.text_area :info, placeholder: "info", rows: "10" %>
       <%= form.file_field :image %>
@@ -22,9 +23,10 @@
                   "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
     </div>
       <%= form.text_field :author_name, placeholder: "作者名" %>
-      <%= form.text_field :category, placeholder: "ジャンル" %>
-      <%= form.text_field :appearance, placeholder: "保存状態"%>
+      <%= form.collection_select(:category_id, Category.all, :id, :name, {}, {class:"category-select"}) %>
+      <%= form.collection_select(:appearance_id, Appearance.all, :id, :name, {},{class: "appearance-select"})%>
       <%= form.submit "SEND" %>
+      </div>
     <% end %>
   </div>
 </div>
