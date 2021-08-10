@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :move_to_index , only: [:destroy]
 
   def index
-    @books = Book.all
+    @books = Book.order("created_at DESC")
   end
 
   def new
@@ -15,7 +15,6 @@ class BooksController < ApplicationController
       @book.save
       redirect_to root_path 
     else
-      binding.pry
       render :new
     end
   end
@@ -28,6 +27,15 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @book.destroy
     redirect_to action: :index
+  end
+
+  def edit
+    @book = Book.find(params[:id])
+  end
+
+  def update
+    @book = Book.find(params[:id])
+    @book.update(book_params)
   end
 
   private
