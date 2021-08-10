@@ -22,14 +22,22 @@
     <div class="book-contents-image">
         <%= link_to "詳細ページ",book_path(book.id) %>
       <span><%= image_tag book.image, class: "item-image" %></span>
-      <% if book.user.id == current_user.id %>
+      <% if  user_signed_in? %>
+
+        <% if book.user.id == current_user.id %>
         <ul class="more_list">
           <li>
             <%= link_to '削除', "/books/#{book.id}", method: :delete %>
           </li>
+          <li>
+            <%= link_to '編集', edit_book_path(book.id) , method: :get %>
+          </li>
         </ul>
-      <% else %>
-        <%= link_to "購入画面に進む", "#", class:"item-sell-btn" %>
+
+        <% else %>
+                      <%= link_to "購入画面に進む", "#", class:"item-sell-btn" %>
+        <% end %>
+
       <% end %>
     </div>
 

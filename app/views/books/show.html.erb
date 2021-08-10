@@ -21,3 +21,20 @@
 <div class="item-book-info">
   <%= @book.info %>
 </div>
+<div class="">
+<% if user_signed_in? %>
+
+  <% if @book.user.id = current_user.id %>
+  <div class="edit-btn">
+    <%= link_to "編集する", edit_book_path(@book), method: :get, class:"book-destroy" %>
+      <p>or</p>
+    <%= link_to "削除する", book_path(@book), method: :delete, class:"book-destroy" %>
+  </div>
+  <% else %>
+  <div class="order-btn">
+    <%= link_to  "購入する", "#", class:"book-order-btn"  %>
+  </div>
+  <% end %>
+
+<% end %>
+</div>
