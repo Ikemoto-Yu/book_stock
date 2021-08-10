@@ -15,7 +15,6 @@ class BooksController < ApplicationController
       @book.save
       redirect_to root_path 
     else
-      binding.pry
       render :new
     end
   end
