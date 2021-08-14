@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
-  before_action :move_to_index , only: [:destroy]
+  before_action :authenticate_user! , except: [:index, :show]
+  before_action :move_to_index , only: [:destroy,:edit,:update]
 
   def index
     @books = Book.order("created_at DESC")
