@@ -1,25 +1,33 @@
- <div class="content_post" style="background-image: url(<%= tweet.image %>);">
-
- <div class="more">
-        <span><%= image_tag 'arrow_top.png' %></span>
+  <div class="content_post" style="background-image: url(<%= book.image %>);">
+        <span><%= image_tag book.image, class: "item-image" %></span>
+    <div class="more">
+      <% if  user_signed_in? %>
+        <% if book.user.id == current_user.id %>
         <ul class="more_list">
-        <li>
-            <%= link_to '詳細', '#', method: :get %>
-          </li>
-           <% if user_signed_in? && current_user.id == tweet.user_id %>
-         <li>
-            <%= link_to '編集', '#', method: :get %>
+          <li>
+            <%= link_to '削除', "/books/#{book.id}", method: :delete %>
           </li>
           <li>
-            <%= link_to '削除', '#', method: :delete %>
+            <%= link_to '編集', edit_book_path(book.id) , method: :get %>
           </li>
-           <% end %>
         </ul>
-      </div>
-      <p><%= book.info %></p>
+        <% else %>
+          <ul class="more_list">
+            <li>
+              <%= link_to "詳細ページ",book_path(book.id) %>
+            </li>
+            <li>
+              <%= link_to "購入画面に進む", "#", class:"item-sell-btn" %>
+            </li>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
       <span class="name">
         <a href="/users/<%= book.user.id %>">
           <span>投稿者</span><%= book.user.nickname %>
         </a>
       </span>
-    </div>
+  </div>
+
+

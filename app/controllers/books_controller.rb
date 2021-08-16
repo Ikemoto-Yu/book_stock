@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
-  before_action :move_to_index , only: [:destroy]
+  before_action :authenticate_user! , except: [:index, :show]
+  before_action :move_to_index , only: [:destroy,:edit,:update]
 
   def index
     @books = Book.order("created_at DESC")
@@ -11,6 +12,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
+    binding.pry
     if @book.valid?
       @book.save
       redirect_to root_path 

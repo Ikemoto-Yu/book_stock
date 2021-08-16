@@ -1,44 +1,62 @@
-<div class="item-img-content">
-  <%= image_tag @book.image , class:"book-box-img" %>
-</div>
-<div class="item-book-contents">
-  <span class="item-book-price">
-    <%= @book.price %>¥
-  </span>
-  <span class="item-book-category">
-    <%= @book.category.name %>
-  </span>
-  <span class="item-book-author_name">
-    <%= @book.author_name %>
-  </span>
-  <span class="item-book-published_on">
-    <%= @book.published_on %>
-  </span>
-  <span class="item-book-appearance">
-    <%= @book.appearance.name %>
-  </span>
-</div>
-<div class="item-book-info">
-  <%= @book.info %>
-</div>
+<<div class="item-show">
+  <div class="item-box">
+    <h2 class="name">
+      <%= @book.name %>
+    </h2>
+    <div class="item-img-content">
+      <%= image_tag @book.image ,class:"item-box-img" %>
 
-<div class="">
-<% if user_signed_in? %>
+    </div>
+    <div class="item-price-box">
+      <span class="item-price">
+        <%= @book.price %> ¥
+      </span>
+      <span class="item-postage">
+        <%= @book.author_name %>
+      </span>
+    </div>
 
-  <% if @book.user.id = current_user.id %>
-  <div class="edit-btn">
-    <%= link_to "編集する", edit_book_path(@book), method: :get, class:"book-destroy" %>
-      <p>or</p>
-    <%= link_to "削除する", book_path(@book), method: :delete, class:"book-destroy" %>
-  </div>
-  <% else %>
-  <div class="order-btn">
-    <%= link_to  "購入する", "#", class:"book-order-btn"  %>
-  </div>
+
+
+   <% if user_signed_in?  %>
+
+     <% if @book.user.id == current_user.id %>
+    <%= link_to "商品の編集", edit_item_path(@book.id), method: :get, class: "item-red-btn" %>
+    <p class="or-text">or</p>
+    <%= link_to "削除", book_path(@book), method: :delete, class:"item-destroy" %>
+     <% else %>
+
+    <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
+      <% end %>
+
   <% end %>
 
-<% end %>
-</div>
+    <div class="item-explain-box">
+      <span><%= @book.info %></span>
+    </div>
+    <table class="detail-table">
+      <tbody>
+        <tr>
+          <th class="detail-item">出品者名</th>
+          <td class="detail-value"><%= @book.user.nickname %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">カテゴリー</th>
+          <td class="detail-value"><%= @book.category.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">本の状態</th>
+          <td class="detail-value"><%= @book.appearance.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">本の著者</th>
+          <td class="detail-value"><%= @book.author_name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">出版日</th>
+          <td class="detail-value"><%= @book.published_on %></td>
+        </tr>
+    </table>
 
  <div class="container">
     <div class="comments">
