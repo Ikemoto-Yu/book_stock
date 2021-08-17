@@ -17,4 +17,12 @@ class Book < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :appearance
+
+  def self.search(search)
+    if search != ""
+      Book.where('name LIKE(?)', "%#{search}%")
+    else
+      Book.all
+    end
+  end
 end
