@@ -1,29 +1,74 @@
-<h2 class="book-edit-title">本の情報を入力してください</h2>
-<%= form_with model: @book , url: book_path(@book), local: true do |form| %>
+<div class="contents row">
+  <div class="container">
+    <h3>投稿する</h3>
 
-<%= render 'shared/errors', model: form.object %>
-
+    <%= form_with model: @book, url: book_path(@book) , local: true do |f| %>
+        <%= render 'shared/errors' , model: f.object %>
       <div class="book-contents-box">
-      <%= form.text_field :name, placeholder: "タイトル" %>
-      <%= form.text_area :info, placeholder: "info", rows: "10" %>
-      <%= form.file_field :image %>
-      <%= form.text_field :price, placeholder: "希望小売価格" %>
+   <div class="new-items">
+      <div class="weight-bold-text">
+        商品名
+        <span class="indispensable">必須</span>
+      </div>
+      <%= f.text_area :name, class:"items-text", id:"item-name", placeholder:"商品名（必須）", maxlength:"40" %>
+      <div class="items-explain">
+        <div class="weight-bold-text">
+          商品の説明
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_area :info, class:"items-text", id:"item-info", placeholder:"の説明（必須 1,000文字まで)" ,rows:"7" ,maxlength:"1000" %>
+      </div>
+    </div>
+     <div class="img-upload">
+      <div class="weight-bold-text">
+        商品画像
+        <span class="indispensable">必須</span>
+      </div>
+      <div class="click-upload">
+        <p>
+          クリックしてファイルをアップロード
+        </p>
+        <%= f.file_field :image, id:"item-image" %>
+      </div>
+    </div>
+      <%= f.text_field :price, placeholder: "希望小売価格" %>
+    <div class="book-birthform">
+     <div class="weight-bold-text">
+        発行日
+        <span class="indispensable">必須</span>
+      </div>
       <div class='input-birth-wrap'>
       <%= raw sprintf(
-                  form.date_select(
+                  f.date_select(
                     :published_on,
                     class:'select-birth',
                     id:"birth-date",
                     use_month_numbers: true,
                     prompt:'--',
-                    start_year: 1930,
-                    end_year: (Time.now.year - 5),
+                    start_year: (Time.now.year),
+                    end_year: 1930,
                     date_separator: '%s'),
                   "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
+      </div>
+      </div>
+      <%= f.text_field :author_name, placeholder: "作者名" %>
+     <div class="items-detail">
+      <div class="weight-bold-text">商品の詳細</div>
+      <div class="form">
+        <div class="weight-bold-text">
+          カテゴリー
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
+        <div class="weight-bold-text">
+          商品の状態
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.collection_select(:appearance_id , Appearance.all, :id, :name, {}, {class:"select-box", id:"item-sales-status"}) %>
+      </div>
     </div>
-      <%= form.text_field :author_name, placeholder: "作者名" %>
-      <%= form.collection_select(:category_id, Category.all, :id, :name, {}, {class:"category-select"}) %>
-      <%= form.collection_select(:appearance_id, Appearance.all, :id, :name, {},{class: "appearance-select"})%>
-      <%= form.submit "SEND" %>
+      <%= f.submit "SEND" %>
       </div>
     <% end %>
+  </div>
+</div>

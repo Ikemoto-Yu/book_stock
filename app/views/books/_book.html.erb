@@ -23,7 +23,7 @@
         <% end %>
       <% end %>
     </div>
-    <p><%= book.name %></p>
+    <p><%= link_to @book.name, book_path(@book) %></p>
       <span class="name">
         <a href="/users/<%= book.user.id %>">
           <span>投稿者</span><%= book.user.nickname %>
