@@ -1,7 +1,7 @@
 class Book < ApplicationRecord
   has_one_attached :image
   belongs_to :user
-  has_one :orders_admins
+  has_one :orders_admin
   has_many :comments , dependent: :destroy
   with_options presence: true do
     validates :info

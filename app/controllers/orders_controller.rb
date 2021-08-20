@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :params_bookid, only: [:index , :create]
   before_action :move_to_index, only: [:index, :create]
+  before_action :move_to_index_nil_book, only: [:index, :create]
 
   def index
     @order_orders_admin = OrderOrdersAdmin.new
@@ -39,7 +40,13 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-    unless @book.user.id != current_user.id || @book.orders_admin.nil?
+    unless @book.user.id != current_user.id
+      redirect_to root_path
+    end
+  end
+
+  def move_to_index_nil_book
+    unless @book.orders_admin.nil?
       redirect_to root_path
     end
   end

@@ -58,11 +58,11 @@ ActiveRecord::Schema.define(version: 2021_08_20_112809) do
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "phone_number"
-    t.bigint "orders_admins_id"
+    t.string "phone_number", null: false
+    t.bigint "orders_admin_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["orders_admins_id"], name: "index_orders_on_orders_admins_id"
+    t.index ["orders_admin_id"], name: "index_orders_on_orders_admin_id"
   end
 
   create_table "orders_admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 2021_08_20_112809) do
   add_foreign_key "books", "users"
   add_foreign_key "comments", "books"
   add_foreign_key "comments", "users"
+  add_foreign_key "orders", "orders_admins"
   add_foreign_key "orders_admins", "books"
   add_foreign_key "orders_admins", "users"
 end

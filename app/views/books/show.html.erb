@@ -1,10 +1,15 @@
-<<div class="item-show">
+<div class="item-show">
   <div class="item-box">
     <h2 class="name">
       <%= @book.name %>
     </h2>
     <div class="item-img-content">
       <%= image_tag @book.image ,class:"item-box-img" %>
+      <% unless @book.orders_admin.nil?%>
+      <div class="sold-out">
+        <span>Sold Out!!</span>
+      </div>
+      <% end %>
 
     </div>
     <div class="item-price-box">
