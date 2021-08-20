@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_10_130406) do
+ActiveRecord::Schema.define(version: 2021_08_20_112809) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -57,6 +57,23 @@ ActiveRecord::Schema.define(version: 2021_08_10_130406) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "phone_number"
+    t.bigint "orders_admins_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["orders_admins_id"], name: "index_orders_on_orders_admins_id"
+  end
+
+  create_table "orders_admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_orders_admins_on_book_id"
+    t.index ["user_id"], name: "index_orders_admins_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -76,4 +93,6 @@ ActiveRecord::Schema.define(version: 2021_08_10_130406) do
   add_foreign_key "books", "users"
   add_foreign_key "comments", "books"
   add_foreign_key "comments", "users"
+  add_foreign_key "orders_admins", "books"
+  add_foreign_key "orders_admins", "users"
 end
