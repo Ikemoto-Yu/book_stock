@@ -1,10 +1,15 @@
-<<div class="item-show">
+<div class="item-show">
   <div class="item-box">
     <h2 class="name">
       <%= @book.name %>
     </h2>
     <div class="item-img-content">
       <%= image_tag @book.image ,class:"item-box-img" %>
+      <% unless @book.orders_admin.nil?%>
+      <div class="sold-out">
+        <span>Sold Out!!</span>
+      </div>
+      <% end %>
 
     </div>
     <div class="item-price-box">
@@ -26,7 +31,7 @@
     <%= link_to "削除", book_path(@book), method: :delete, class:"item-destroy" %>
      <% else %>
 
-    <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
+    <%= link_to "購入画面に進む",book_orders_path(@book.id) ,class:"item-red-btn"%>
       <% end %>
 
   <% end %>

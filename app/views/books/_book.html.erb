@@ -1,5 +1,10 @@
   <div class="content_post" style="background-image: url(<%= book.image %>);">
           <span><%= image_tag book.image.variant(resize: '450x600') %></span>
+       <% unless book.orders_admin.nil? %>
+          <div class='sold-out'>
+            <span>Sold Out!!</span>
+          </div>
+       <% end %>
     <div class="more">
       <% if  user_signed_in? %>
         <% if book.user.id == current_user.id %>
@@ -17,7 +22,7 @@
               <%= link_to "詳細ページ",book_path(book.id) %>
             </li>
             <li>
-              <%= link_to "購入画面に進む", "#", class:"item-sell-btn" %>
+              <%= link_to "購入画面に進む", book_orders_path(book.id), class:"item-sell-btn" %>
             </li>
           </ul>
         <% end %>
