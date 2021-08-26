@@ -23,6 +23,7 @@
       <div class="weight-bold-text">
         商品画像
         <span class="indispensable">必須</span>
+         <div id="image-list"></div>
       </div>
       <div class="click-upload">
         <p>
@@ -70,5 +71,6 @@
       <%= f.submit "SEND" %>
       </div>
     <% end %>
+    <%= image_tag @book.image, id: 'image' if @book.image.present? %> 
   </div>
 </div>
