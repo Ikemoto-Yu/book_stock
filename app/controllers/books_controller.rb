@@ -13,7 +13,6 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-    binding.pry
     if @book.valid?
       @book.save
       redirect_to root_path 
