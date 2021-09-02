@@ -1,15 +1,10 @@
-<div class="item-show">
-  <div class="item-box">
+<div class="book-show">
+  <div class="book-box">
     <h2 class="name">
       <%= @book.name %>
     </h2>
     <div class="item-img-content">
-      <%= image_tag @book.image ,class:"item-box-img" %>
-      <% unless @book.orders_admin.nil?%>
-      <div class="sold-out">
-        <span>Sold Out!!</span>
-      </div>
-      <% end %>
+      <%= image_tag @book.image ,class:"book-box-img" %>
 
     </div>
     <div class="item-price-box">
@@ -26,12 +21,17 @@
    <% if user_signed_in?  %>
 
      <% if @book.user.id == current_user.id %>
-    <%= link_to "商品の編集", edit_item_path(@book.id), method: :get, class: "item-red-btn" %>
+    <%= link_to "商品の編集", edit_item_path(@book.id), method: :get, class: "book-red-btn" %>
     <p class="or-text">or</p>
     <%= link_to "削除", book_path(@book), method: :delete, class:"item-destroy" %>
      <% else %>
 
-    <%= link_to "購入画面に進む",book_orders_path(@book.id) ,class:"item-red-btn"%>
+           <% unless @book.orders_admin.nil?%>
+              <%= link_to "Topページに戻る", root_path , class:"book-red-btn" %>
+           <% else %>
+              <%= link_to "購入画面に進む",book_orders_path(@book.id) ,class:"book-red-btn"%>
+           <% end %>
+
       <% end %>
 
   <% end %>
@@ -42,23 +42,23 @@
     <table class="detail-table">
       <tbody>
         <tr>
-          <th class="detail-item">出品者名</th>
+          <th class="detail-book">出品者名</th>
           <td class="detail-value"><%= @book.user.nickname %></td>
         </tr>
         <tr>
-          <th class="detail-item">カテゴリー</th>
+          <th class="detail-book">カテゴリー</th>
           <td class="detail-value"><%= @book.category.name %></td>
         </tr>
         <tr>
-          <th class="detail-item">本の状態</th>
+          <th class="detail-book">本の状態</th>
           <td class="detail-value"><%= @book.appearance.name %></td>
         </tr>
         <tr>
-          <th class="detail-item">本の著者</th>
+          <th class="detail-book">本の著者</th>
           <td class="detail-value"><%= @book.author_name %></td>
         </tr>
         <tr>
-          <th class="detail-item">出版日</th>
+          <th class="detail-book">出版日</th>
           <td class="detail-value"><%= @book.published_on %></td>
         </tr>
     </table>
@@ -73,6 +73,8 @@
         </p>
       <% end %>
     </div>
+  <% if @book.orders_admin.nil? %>
+
     <div class="comment-send-box">
       <% if user_signed_in? %>
       <%= form_with(model: [@book, @comment], url: book_comments_path(@book.id) ,local: true) do |form| %>
@@ -83,5 +85,9 @@
       <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p>
       </strong>
     <% end %>
+
+  <% else %>
+
+  <% end %>
     </div>
   </div>

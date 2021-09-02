@@ -1,4 +1,4 @@
-.item-show {
+.book-show {
   background-color: #f8f8f8;
   width: 100vw;
   display: flex;
@@ -7,7 +7,7 @@
   padding: 5vh 0;
 }
 
-.item-box {
+.book-box {
   background-color: #FFF;
   width: 70vw;
   min-width: 1200px;
@@ -17,13 +17,13 @@
   align-items: center;
 }
 
-.item-box>.name {
+.book-box>.name {
   text-align: center;
   font-weight: bold;
   font-size: 25px;
 }
 
-.item-box-img {
+.book-box-img {
   height: 50vh;
   width: 60vw;
   min-height: 500px;
@@ -48,7 +48,7 @@
 }
 
 
-.item-red-btn {
+.book-red-btn {
   text-align: center;
   background-color: #ea352d;
   font-size: 24px;
@@ -82,7 +82,7 @@
   width: 100%;
 }
 
-.detail-item {
+.detail-book {
   width: 20%;
   background-color: #eee;
   border: 1px solid #dedede;
