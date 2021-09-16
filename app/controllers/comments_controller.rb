@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @comment = @book.comments.new(comment_params)
     if @comment.valid?
       @comment.save
-    redirect_to root_path
+      ActionCable.server.broadcast 'comment_channel', content: @comment
     else
       render 'show'
     end
