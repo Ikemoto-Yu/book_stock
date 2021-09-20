@@ -64,14 +64,14 @@
     </table>
 
  <div class="container">
-    <div class="comments" , id='comments'>
+    <div class="comments">
       <h4>＜コメント一覧＞</h4>
+        <div id='comments'>
       <% @comments.each do |comment| %>
-        <p>
           <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %>:</strong>
-          <%= comment.text %>
-        </p>
+          <p><%= comment.text %></p>
       <% end %>
+        </div>
     </div>
     <div class="comment-send-box">
       <% if user_signed_in? %>
