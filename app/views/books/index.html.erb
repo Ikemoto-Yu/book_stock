@@ -2,7 +2,9 @@
   <%= form.text_field :keyword, placeholder: "本のタイトルで検索する", class: "search-input" %>
   <%= form.submit "検索" , class: "search-btn" %>
 <% end %>
-
+<div class="contents row">
+  <%= link_to "詳細検索で検索する" %>
+</div>
 <div class="contents row">
   <% unless @books.empty? %>
      <% @books.each do |book| %>
